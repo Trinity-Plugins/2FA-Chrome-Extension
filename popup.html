@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2FA 自动识别器</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="popup-header">
+      <div class="header-icon">🔐</div>
+      <div class="header-text">
+        <div class="header-title">2FA 自动识别器</div>
+        <div class="header-subtitle" id="current-domain">加载中...</div>
+      </div>
+    </div>
+
+    <div class="popup-body">
+      <!-- 当前页面状态 -->
+      <div class="section" id="current-page-section">
+        <div class="section-title">当前页面</div>
+        <div id="current-page-status" class="status-box">
+          <span class="status-loading">检测中...</span>
+        </div>
+        <div class="action-row" id="current-page-actions" style="display:none;">
+          <button class="btn btn-primary" id="btn-show-codes" style="display:none;">显示验证码</button>
+          <button class="btn btn-secondary" id="btn-rescan">重新扫描</button>
+          <button class="btn btn-secondary" id="btn-manual">手动添加</button>
+        </div>
+      </div>
+
+      <!-- 已保存的密钥 -->
+      <div class="section">
+        <div class="section-title-row">
+          <div class="section-title">已保存的密钥</div>
+          <span class="count-badge" id="total-count">0</span>
+        </div>
+        <div class="entries-list" id="entries-list">
+          <div class="empty-state">暂无保存的密钥</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-footer">
+      <button class="btn btn-ghost" id="btn-options">⚙️ 设置与管理</button>
+    </div>
+  </div>
+
+  <script src="totp.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

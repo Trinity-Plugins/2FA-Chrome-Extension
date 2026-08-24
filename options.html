@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2FA 自动识别器 - 设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <div class="header-icon">🔐</div>
+      <div>
+        <h1>2FA 自动识别器</h1>
+        <p class="subtitle">设置与密钥管理</p>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <!-- 设置区域 -->
+      <section class="card">
+        <h2>⚙️ 通用设置</h2>
+        <div class="settings-list">
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-title">自动检测2FA页面</div>
+              <div class="setting-desc">访问疑似2FA页面时自动弹出提示</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-autoDetect" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-title">已登记页面自动生成</div>
+              <div class="setting-desc">访问已保存密钥的页面时自动显示验证码</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-autoGenerate" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-title">自动扫描二维码</div>
+              <div class="setting-desc">检测到2FA页面时自动尝试扫描二维码</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-autoScanQR" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-title">桌面通知</div>
+              <div class="setting-desc">检测到2FA页面时发送桌面通知</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="setting-notifyOnDetect">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-title">域名登记级别</div>
+              <div class="setting-desc">默认按一级域名（如 example.com）登记，可在添加时选择保持完整地址</div>
+            </div>
+            <select id="setting-domainLevel" class="select-input">
+              <option value="eTLD+1">一级域名 (推荐)</option>
+              <option value="full">完整域名</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="btn-save-settings">保存设置</button>
+          <span class="save-status" id="save-status"></span>
+        </div>
+      </section>
+
+      <!-- 密钥管理 -->
+      <section class="card">
+        <div class="card-header-row">
+          <h2>🔑 已保存的密钥</h2>
+          <div class="card-actions">
+            <button class="btn btn-secondary" id="btn-add-manual">+ 手动添加</button>
+            <button class="btn btn-secondary" id="btn-export">导出</button>
+            <button class="btn btn-danger-ghost" id="btn-import">导入</button>
+            <input type="file" id="import-file" accept=".json" style="display:none;">
+          </div>
+        </div>
+
+        <div class="entries-table-container">
+          <table class="entries-table" id="entries-table">
+            <thead>
+              <tr>
+                <th>服务</th>
+                <th>账户</th>
+                <th>域名</th>
+                <th>当前验证码</th>
+                <th>算法</th>
+                <th>最后使用</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="entries-tbody">
+              <tr><td colspan="7" class="empty-cell">加载中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 自定义域名 -->
+      <section class="card">
+        <h2>🌐 自定义域名配置</h2>
+        <p class="card-desc">对于使用二级域名售卖或多子域名的服务，可配置保持完整地址匹配。</p>
+        <div class="custom-domains-list" id="custom-domains-list">
+          <div class="empty-cell">暂无自定义配置</div>
+        </div>
+        <div class="add-domain-row">
+          <input type="text" id="new-domain-input" placeholder="例如: account.example.com" class="text-input">
+          <button class="btn btn-secondary" id="btn-add-domain">添加</button>
+        </div>
+      </section>
+
+      <!-- 关于 -->
+      <section class="card">
+        <h2>ℹ️ 关于</h2>
+        <div class="about-content">
+          <p><strong>2FA 自动识别器</strong> v1.0.0</p>
+          <p>自动识别两步验证页面，扫描二维码保存密钥，本地生成 TOTP 验证码。</p>
+          <p class="security-note">🔒 所有密钥仅存储在本地浏览器 (chrome.storage.local)，不会上传到任何服务器。</p>
+          <p class="security-note">⚠️ 请妥善保管你的密钥，建议在使用后及时锁定浏览器。</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 手动添加模态框 -->
+  <div class="modal-overlay" id="add-modal" style="display:none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>手动添加2FA密钥</h3>
+        <button class="modal-close" id="modal-close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>服务名称</label>
+          <input type="text" id="modal-issuer" placeholder="例如：GitHub" class="text-input">
+        </div>
+        <div class="form-group">
+          <label>账户名</label>
+          <input type="text" id="modal-account" placeholder="例如：user@example.com" class="text-input">
+        </div>
+        <div class="form-group">
+          <label>域名</label>
+          <input type="text" id="modal-domain" placeholder="例如：github.com" class="text-input">
+        </div>
+        <div class="form-group">
+          <label>密钥 (Base32) *</label>
+          <input type="text" id="modal-secret" placeholder="例如：JBSWY3DPEHPK3PXP" class="text-input" style="font-family:monospace;">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>位数</label>
+            <select id="modal-digits" class="select-input">
+              <option value="6" selected>6位</option>
+              <option value="7">7位</option>
+              <option value="8">8位</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>周期(秒)</label>
+            <select id="modal-period" class="select-input">
+              <option value="30" selected>30</option>
+              <option value="60">60</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>算法</label>
+            <select id="modal-algorithm" class="select-input">
+              <option value="sha1" selected>SHA1</option>
+              <option value="sha256">SHA256</option>
+              <option value="sha512">SHA512</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>备注</label>
+          <input type="text" id="modal-note" placeholder="可选" class="text-input">
+        </div>
+        <div id="modal-preview" class="preview-box" style="display:none;">
+          <span>预览：</span>
+          <span class="preview-code" id="modal-preview-code">------</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="modal-cancel">取消</button>
+        <button class="btn btn-primary" id="modal-save">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="totp.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,690 @@
+/* 2FA 扩展 - 内容脚本样式 */
+/* 所有类名以 fa2- 前缀，避免与页面样式冲突 */
+
+#2fa-extension-container {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+#2fa-extension-container * {
+  box-sizing: border-box;
+}
+
+/* 卡片基础样式 */
+#2fa-extension-container .fa2-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  overflow: hidden;
+  animation: fa2-slideIn 0.3s ease;
+  border: 1px solid #e5e7eb;
+}
+
+@keyframes fa2-slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fa2-flash {
+  0% { background-color: #d1fae5; }
+  100% { background-color: transparent; }
+}
+
+/* 卡片头部 */
+#2fa-extension-container .fa2-header {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  gap: 10px;
+}
+
+#2fa-extension-container .fa2-icon {
+  font-size: 20px;
+}
+
+#2fa-extension-container .fa2-title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#2fa-extension-container .fa2-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#2fa-extension-container .fa2-close:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* 卡片主体 */
+#2fa-extension-container .fa2-body {
+  padding: 16px;
+}
+
+#2fa-extension-container .fa2-body p {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* 标签 */
+#2fa-extension-container .fa2-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+#2fa-extension-container .fa2-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  background: #f3f4f6;
+  color: #6b7280;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+#2fa-extension-container .fa2-source-tag {
+  font-size: 11px;
+  color: #9ca3af;
+  background: #f9fafb;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* 按钮 */
+#2fa-extension-container .fa2-actions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+#2fa-extension-container .fa2-btn {
+  flex: 1;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+#2fa-extension-container .fa2-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+#2fa-extension-container .fa2-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#2fa-extension-container .fa2-btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+#2fa-extension-container .fa2-btn-secondary:hover {
+  background: #d1d5db;
+}
+
+#2fa-extension-container .fa2-btn-ghost {
+  background: transparent;
+  color: #6b7280;
+}
+
+#2fa-extension-container .fa2-btn-ghost:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* 密钥列表 */
+#2fa-extension-container .fa2-secret-list {
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+#2fa-extension-container .fa2-secret-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+
+#2fa-extension-container .fa2-secret-item:hover {
+  border-color: #c7d2fe;
+}
+
+#2fa-extension-container .fa2-checkbox input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+#2fa-extension-container .fa2-secret-info {
+  flex: 1;
+  min-width: 0;
+}
+
+#2fa-extension-container .fa2-secret-issuer {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+#2fa-extension-container .fa2-secret-account {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+#2fa-extension-container .fa2-secret-preview {
+  font-size: 11px;
+  color: #9ca3af;
+  font-family: monospace;
+  margin-top: 2px;
+}
+
+/* 域名配置 */
+#2fa-extension-container .fa2-domain-config {
+  padding: 10px;
+  background: #f9fafb;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+#2fa-extension-container .fa2-domain-config label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+#2fa-extension-container .fa2-domain-config input {
+  width: 14px;
+  height: 14px;
+}
+
+/* 表单 */
+#2fa-extension-container .fa2-form-group {
+  margin-bottom: 12px;
+}
+
+#2fa-extension-container .fa2-form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+#2fa-extension-container .fa2-form-group input,
+#2fa-extension-container .fa2-form-group select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: white;
+  color: #111827;
+}
+
+#2fa-extension-container .fa2-form-group input:focus,
+#2fa-extension-container .fa2-form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#2fa-extension-container .fa2-form-row {
+  display: flex;
+  gap: 8px;
+}
+
+#2fa-extension-container .fa2-form-row .fa2-form-group {
+  flex: 1;
+}
+
+/* 预览 */
+#2fa-extension-container .fa2-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #f0fdf4;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+#2fa-extension-container .fa2-preview-label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+#2fa-extension-container .fa2-preview-code {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: monospace;
+  letter-spacing: 2px;
+}
+
+/* 验证码面板 */
+#2fa-extension-container .fa2-code-list {
+  margin-bottom: 12px;
+}
+
+#2fa-extension-container .fa2-code-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+#2fa-extension-container .fa2-code-info {
+  flex: 1;
+  min-width: 0;
+}
+
+#2fa-extension-container .fa2-code-issuer {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+#2fa-extension-container .fa2-code-account {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+#2fa-extension-container .fa2-code-value {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  letter-spacing: 3px;
+  color: #111827;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+#2fa-extension-container .fa2-code-error {
+  color: #ef4444;
+  font-size: 12px;
+  letter-spacing: normal;
+}
+
+#2fa-extension-container .fa2-copy-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+#2fa-extension-container .fa2-copy-btn:hover {
+  background: #e5e7eb;
+}
+
+/* 倒计时 */
+#2fa-extension-container .fa2-countdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#2fa-extension-container .fa2-countdown-bar {
+  flex: 1;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#2fa-extension-container .fa2-countdown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #667eea);
+  border-radius: 3px;
+  transition: width 1s linear;
+}
+
+#2fa-extension-container .fa2-countdown-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  min-width: 30px;
+  text-align: right;
+}
+
+/* Toast 提示 */
+#2fa-extension-container .fa2-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  animation: fa2-slideIn 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#2fa-extension-container .fa2-toast-success {
+  border-left: 4px solid #10b981;
+}
+
+#2fa-extension-container .fa2-toast-icon {
+  font-size: 18px;
+}
+
+#2fa-extension-container .fa2-toast-text {
+  font-size: 13px;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  #2fa-extension-container .fa2-card {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  #2fa-extension-container .fa2-body p {
+    color: #d1d5db;
+  }
+
+  #2fa-extension-container .fa2-tag {
+    background: #374151;
+    color: #9ca3af;
+  }
+
+  #2fa-extension-container .fa2-actions {
+    background: #111827;
+    border-top-color: #374151;
+  }
+
+  #2fa-extension-container .fa2-btn-secondary {
+    background: #374151;
+    color: #d1d5db;
+  }
+
+  #2fa-extension-container .fa2-btn-secondary:hover {
+    background: #4b5563;
+  }
+
+  #2fa-extension-container .fa2-btn-ghost {
+    color: #9ca3af;
+  }
+
+  #2fa-extension-container .fa2-btn-ghost:hover {
+    background: #374151;
+    color: #d1d5db;
+  }
+
+  #2fa-extension-container .fa2-secret-item {
+    border-color: #374151;
+  }
+
+  #2fa-extension-container .fa2-secret-issuer,
+  #2fa-extension-container .fa2-code-issuer {
+    color: #f3f4f6;
+  }
+
+  #2fa-extension-container .fa2-secret-account,
+  #2fa-extension-container .fa2-code-account {
+    color: #9ca3af;
+  }
+
+  #2fa-extension-container .fa2-source-tag {
+    background: #374151;
+    color: #9ca3af;
+  }
+
+  #2fa-extension-container .fa2-domain-config {
+    background: #111827;
+    color: #d1d5db;
+  }
+
+  #2fa-extension-container .fa2-form-group label {
+    color: #d1d5db;
+  }
+
+  #2fa-extension-container .fa2-form-group input,
+  #2fa-extension-container .fa2-form-group select {
+    background: #111827;
+    border-color: #374151;
+    color: #f3f4f6;
+  }
+
+  #2fa-extension-container .fa2-code-item {
+    background: #111827;
+  }
+
+  #2fa-extension-container .fa2-code-value {
+    color: #f3f4f6;
+  }
+
+  #2fa-extension-container .fa2-countdown-bar {
+    background: #374151;
+  }
+
+  #2fa-extension-container .fa2-toast {
+    background: #1f2937;
+  }
+
+  #2fa-extension-container .fa2-toast-text {
+    color: #d1d5db;
+  }
+
+  #2fa-extension-container .fa2-preview {
+    background: #064e3b;
+  }
+}
+
+/* ========== 简洁半透明浅蓝色验证码面板 ========== */
+#2fa-extension-container .fa2-code-panel-minimal {
+  background: rgba(191, 219, 254, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06);
+  width: auto;
+  min-width: 220px;
+  max-width: 320px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+#2fa-extension-container .fa2-minimal-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  color: #1e40af;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+#2fa-extension-container .fa2-minimal-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+#2fa-extension-container .fa2-minimal-body {
+  padding: 14px 16px 12px;
+}
+
+#2fa-extension-container .fa2-minimal-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+#2fa-extension-container .fa2-minimal-issuer {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e3a8a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
+#2fa-extension-container .fa2-minimal-code {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', Consolas, monospace;
+  letter-spacing: 2px;
+  color: #1e40af;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+#2fa-extension-container .fa2-minimal-code:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+#2fa-extension-container .fa2-minimal-code.fa2-code-error {
+  color: #dc2626;
+  font-size: 12px;
+  letter-spacing: normal;
+  cursor: default;
+}
+
+#2fa-extension-container .fa2-minimal-countdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(147, 197, 253, 0.4);
+}
+
+#2fa-extension-container .fa2-minimal-countdown-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#2fa-extension-container .fa2-minimal-countdown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+#2fa-extension-container .fa2-minimal-countdown-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #3b82f6;
+  min-width: 24px;
+  text-align: right;
+}
+
+#2fa-extension-container .fa2-minimal-hint {
+  font-size: 10px;
+  color: #60a5fa;
+  text-align: center;
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+/* 深色模式下的简洁面板 */
+@media (prefers-color-scheme: dark) {
+  #2fa-extension-container .fa2-code-panel-minimal {
+    background: rgba(30, 58, 138, 0.75);
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+
+  #2fa-extension-container .fa2-minimal-issuer {
+    color: #bfdbfe;
+  }
+
+  #2fa-extension-container .fa2-minimal-code {
+    color: #dbeafe;
+  }
+
+  #2fa-extension-container .fa2-minimal-code:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  #2fa-extension-container .fa2-minimal-close {
+    color: #bfdbfe;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  #2fa-extension-container .fa2-minimal-countdown {
+    border-top-color: rgba(59, 130, 246, 0.3);
+  }
+
+  #2fa-extension-container .fa2-minimal-countdown-bar {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  #2fa-extension-container .fa2-minimal-countdown-text {
+    color: #93c5fd;
+  }
+
+  #2fa-extension-container .fa2-minimal-hint {
+    color: #93c5fd;
+  }
+}

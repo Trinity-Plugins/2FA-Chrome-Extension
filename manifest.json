@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "2FA 自动识别器",
+  "name": "2FA CE",
   "version": "1.0.0",
-  "description": "自动识别2FA页面，扫描二维码存储密钥，自动生成TOTP验证码",
+  "description": "2FA-Chrome Extension：自动识别2FA页面，扫描二维码存储密钥，本地生成TOTP验证码",
   "permissions": [
     "storage",
     "activeTab",
@@ -30,7 +30,7 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "2FA 自动识别器"
+    "default_title": "2FA CE"
   },
   "options_page": "options.html",
   "icons": {

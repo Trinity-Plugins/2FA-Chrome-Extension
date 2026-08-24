@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "2FA CE",
+    "description": "扩展名称"
+  },
+  "extDesc": {
+    "message": "2FA-Chrome Extension：自动识别2FA页面，扫描二维码存储密钥，本地生成TOTP验证码",
+    "description": "扩展简短描述"
+  }
+}

@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "2FA CE",
+  "name": "__MSG_extName__",
+  "default_locale": "zh_CN",
   "version": "1.0.0",
-  "description": "2FA-Chrome Extension：自动识别2FA页面，扫描二维码存储密钥，本地生成TOTP验证码",
+  "description": "__MSG_extDesc__",
   "permissions": [
     "storage",
     "activeTab",

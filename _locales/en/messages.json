@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "2FA CE",
+    "description": "Extension name"
+  },
+  "extDesc": {
+    "message": "2FA-Chrome Extension: Auto-detect 2FA pages, scan QR codes to store secrets, generate TOTP verification codes locally",
+    "description": "Extension short description"
+  }
+}
